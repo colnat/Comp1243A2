@@ -13,31 +13,12 @@ window.onload = function init()
     gl = canvas.getContext('webgl2');
     if (!gl) { alert( "WebGL 2.0 isn't available" ); }
 
-    //
-    //  Initialize our data for a single triangle
-    //
-
-    // First, initialize the  three points.
-
      points = new Float32Array([
-       -0.9, -1 ,
-       -0.5,  1 ,
-       -0.1, -1 ,
+       -1, -1 ,
+       0,  1 ,
+       1, -1 ,
+    ]);
 
-       0.9, -1 ,
-       0.5  , 1 ,
-       0.1 , -1
-
-          
-        ]);
-
-      
-        
- 
-
-    //
-    //  Configure WebGL
-    //
     gl.viewport( 0, 0, canvas.width, canvas.height );
     gl.clearColor( 1.0, 0.0, 1.0, 1.0 );
     
@@ -68,6 +49,6 @@ window.onload = function init()
 
 function render() {
     gl.clear( gl.COLOR_BUFFER_BIT );
-    gl.drawArrays( gl.TRIANGLES, 0, 6);
+    gl.drawArrays( gl.TRIANGLES, 0, 3);
    
 }
