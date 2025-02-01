@@ -15,16 +15,34 @@ window.onload = function init()
         vec2(1,-1)
      ];
       
+    var colors = [
+        vec4(1.0, 0.0, 0.0, 1.0),  // red
+        vec4(0.0, 0.0, 1.0, 1.0), //blue
+        vec4(0.0, 1.0, 0.0, 1.0),  // green
+        vec4(1.0, 0.0, 0.0, 1.0),  //red
+    ]
 
 
     gl.viewport( 0, 0, canvas.width, canvas.height );
-    gl.clearColor( 1.0, 0.0, 1.0, 1.0 );
+    gl.clearColor( 0.0, 0.0, 0.0, 1.0 );
     
 
     //  Load shaders and initialize attribute buffers
 
     var program = initShaders( gl, "vertex-shader", "fragment-shader" );
     gl.useProgram( program );
+
+    //color buffer
+    var cBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, cBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(colors), gl.STATIC_DRAW);
+    
+    
+    var verColor = gl.getAttribLocation(program, "aColor");
+    gl.vertexAttribPointer(verColor, 4, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(verColor);
+
+
     
     // Load the data into the GPU
 
