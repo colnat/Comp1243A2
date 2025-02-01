@@ -1,10 +1,6 @@
 "use strict";
 
 var gl;
-var points;
-
-
-
 
 window.onload = function init()
 {
@@ -13,11 +9,13 @@ window.onload = function init()
     gl = canvas.getContext('webgl2');
     if (!gl) { alert( "WebGL 2.0 isn't available" ); }
 
-     points = new Float32Array([
-       -1, -1 ,
-       0,  1 ,
-       1, -1 ,
-    ]);
+     var vertices = [
+        vec2(-1,-1),
+        vec2(0,1),
+        vec2(1,-1)
+     ];
+      
+
 
     gl.viewport( 0, 0, canvas.width, canvas.height );
     gl.clearColor( 1.0, 0.0, 1.0, 1.0 );
@@ -32,13 +30,11 @@ window.onload = function init()
 
     var bufferId = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, bufferId );
-  
-    gl.bufferData( gl.ARRAY_BUFFER, points, gl.STATIC_DRAW );
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW );
 
     // Associate out shader variables with our data buffer
 
     var aPosition = gl.getAttribLocation( program, "aPosition" );
-    
     gl.vertexAttribPointer( aPosition, 2, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( aPosition );
     
